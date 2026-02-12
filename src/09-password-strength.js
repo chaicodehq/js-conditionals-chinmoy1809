@@ -27,4 +27,73 @@
  */
 export function checkPasswordStrength(password) {
   // Your code here
+  let points = 0;
+  if (typeof (password) != "string") {
+    return "weak";
+  }
+  if (password.length >= 8) {
+    points++;
+  }
+
+  if (containCaps(password)) {
+    points++;
+  }
+
+  if (containLower(password)) {
+    points++;
+  }
+
+  if (containNum(password)) {
+    points++;
+  }
+
+  if (containSpecial(password)) {
+    points++
+  }
+
+
+  if (points <= 1) {
+    return "weak";
+  } else if (points <= 3) {
+    return "medium";
+  } else if (points === 4) {
+    return "strong";
+  } else {
+    return "very strong";
+  }
+}
+function containCaps(password) {
+  for (let i = 0; i < password.length; i++) {
+    if (password[i] >= 'A' && password[i] <= 'Z') {
+      return true;
+    }
+  }
+  return false;
+}
+
+function containLower(password) {
+  for (let i = 0; i < password.length; i++) {
+    if (password[i] >= 'a' && password[i] <= 'z') {
+      return true;
+    }
+  }
+  return false;
+}
+
+function containNum(password) {
+  for (let i = 0; i < password.length; i++) {
+    if (password[i] >= '0' && password[i] <= '9') {
+      return true;
+    }
+  }
+  return false;
+}
+
+function containSpecial(password) {
+  for (let i = 0; i < password.length; i++) {
+    if ("!@#$%^&*()_+-=[]{}|;:,.<>?".includes(password[i])) {
+      return true;
+    }
+  }
+  return false;
 }
